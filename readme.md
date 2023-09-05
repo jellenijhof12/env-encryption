@@ -1,6 +1,6 @@
-# Laravel Env Encryption
+# Env Encryption
 
-**Frontend Env Encryption** is a tool designed for encrypting and decrypting environment variables within frontend projects. Drawing inspiration from Laravel's encryption techniques, it offers a secure means of safeguarding sensitive environment configurations in client-side applications while enabling their safe inclusion in your version control system (Git).
+**Env Encryption** is a tool designed for encrypting and decrypting environment variables within frontend projects. Drawing inspiration from Laravel's encryption techniques, it offers a secure means of safeguarding sensitive environment configurations in client-side applications while enabling their safe inclusion in your version control system (Git).
 
 ## Installation
 
