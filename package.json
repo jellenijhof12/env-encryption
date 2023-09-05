@@ -1,6 +1,6 @@
 {
   "name": "env-encryption",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A utility for encrypting and decrypting environment variables in frontend projects, inspired by Laravel's encryption methods.",
   "main": "index.js",
   "bin": "index.js",
