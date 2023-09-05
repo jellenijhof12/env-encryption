@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 import { argv } from 'optimist';
 import fs from 'fs';
 import crypto from 'crypto';
