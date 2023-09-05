@@ -1,0 +1,31 @@
+{
+  "name": "env-encryption",
+  "version": "1.0.1",
+  "description": "A utility for encrypting and decrypting environment variables in frontend projects, inspired by Laravel's encryption methods.",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "ts-node index.ts",
+    "watch": "nodemon --exec ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jellenijhof12/env-encryption.git"
+  },
+  "keywords": [],
+  "author": "Jelle Nijhof",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "crypto": "^1.0.1",
+    "optimist": "^0.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "@types/optimist": "^0.0.31",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
