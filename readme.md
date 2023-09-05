@@ -27,9 +27,72 @@ env-encryption [command] --key <encryption-key> --env <environment> --filename <
 - `[command]`: Specify the operation to perform. Use either `encrypt` or `decrypt`.
 - `--key <encryption-key>`: Specify the encryption key. If not provided, a random key will be generated.
 - `--env <environment>`: Specify the environment name.
-- `--filename <filename>`: Specify the environment file to encrypt or decrypt (optional).
+- `--filename <filename>`: Specify the target filename for decrypting (optional).
 - `--force`: Overwrite existing files if they already exist (optional).
 - `--cipher <cipher-algorithm>`: Specify the encryption cipher algorithm. The default is `aes-256-cbc` (optional).
+
+## Examples
+
+#### Encrypting Environment Variables
+
+To encrypt environment variables, follow these steps:
+
+1. Open your terminal.
+
+2. Navigate to the root directory of your project.
+
+3. Make sure a .env file is present for the env your encrypting (e.g., .env.production).
+
+3. Run the following command, replacing the placeholders with your actual data:
+
+   ```bash
+   env-encryption encrypt --key <encryption-key> --env <environment-name> [--force] [--cipher <cipher-algorithm>]
+   ```
+
+   - `<encryption-key>`: Specify the encryption key. If not provided, a random key will be generated.
+   - `<environment-name>`: Specify the environment name.
+   - `--force` (optional): Use this flag to overwrite existing encrypted files.
+   - `--cipher <cipher-algorithm>` (optional): Specify the encryption cipher algorithm (default is `aes-256-cbc`).
+
+   Example:
+
+   ```bash
+   env-encryption encrypt --key mySecretKey --env production --force 
+   ```
+
+4. If you didn't specify an encryption key, the tool will generate a random key and display it in the terminal.
+
+5. The encrypted environment file (e.g., `.env.production.encrypted`) will be created in your project directory.
+
+#### Decrypting Environment Variables
+
+To decrypt environment variables, follow these steps:
+
+1. Open your terminal.
+
+2. Navigate to the root directory of your project.
+
+3. Make sure a .env file is present for the env your encrypting (e.g., .env.production.encrypted).
+
+3. Run the following command, replacing the placeholders with your actual data:
+
+   ```bash
+   env-encryption decrypt --key <encryption-key> --env <environment-name> --filename <filename> [--force] [--cipher <cipher-algorithm>]
+   ```
+
+   - `<encryption-key>`: Specify the decryption key.
+   - `<environment-name>`: Specify the environment name.
+   - `<filename>`: Specify the target filename.
+   - `--force` (optional): Use this flag to overwrite existing files.
+   - `--cipher <cipher-algorithm>` (optional): Specify the encryption cipher algorithm (default is `aes-256-cbc`).
+
+   Example:
+
+   ```bash
+   env-encryption decrypt --key mySecretKey --env production --filename .env --force 
+   ```
+
+4. The decrypted environment file (e.g., `.env`) will be created in your project directory.
 
 ## Commands
 
@@ -38,12 +101,11 @@ env-encryption [command] --key <encryption-key> --env <environment> --filename <
 To encrypt an environment file, use the `encrypt` command:
 
 ```bash
-env-encryption encrypt --key <encryption-key> --env <environment> --filename <filename> [--force] [--cipher <cipher-algorithm>]
+env-encryption encrypt --key <encryption-key> --env <environment> [--force] [--cipher <cipher-algorithm>]
 ```
 
 - `<encryption-key>`: The encryption key (mandatory).
 - `<environment>`: The environment name (mandatory).
-- `<filename>`: The environment file to encrypt (optional).
 - `--force`: Overwrite existing encrypted files (optional).
 - `--cipher <cipher-algorithm>`: Specify the encryption cipher algorithm. The default is `aes-256-cbc` (optional).
 
@@ -59,7 +121,7 @@ env-encryption decrypt --key <encryption-key> --env <environment> --filename <fi
 
 - `<encryption-key>`: The decryption key (mandatory).
 - `<environment>`: The environment name (mandatory).
-- `<filename>`: The environment file to decrypt (optional).
+- `<filename>`: The target filename where the content will be written (optional).
 - `--force`: Overwrite existing files if they already exist (optional).
 - `--cipher <cipher-algorithm>`: Specify the encryption cipher algorithm. The default is `aes-256-cbc` (optional).
 
