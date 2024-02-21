@@ -1,12 +1,13 @@
 {
   "name": "env-encryption",
-  "version": "1.0.9",
+  "version": "1.10.0",
   "description": "A utility for encrypting and decrypting environment variables in frontend projects, inspired by Laravel's encryption methods.",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "ts-node index.ts",
+    "build": "tsc",
     "watch": "nodemon --exec ts-node index.ts"
   },
   "repository": {
