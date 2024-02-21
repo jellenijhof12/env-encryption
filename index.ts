@@ -7,6 +7,7 @@ import chalk from 'chalk';
 const key = argv.key;
 const env = argv.env;
 const filename = argv.filename;
+const inputFilename = argv.inputFilename;
 const force = argv.force;
 const cipher = argv.cipher ?? 'aes-256-cbc';
 
@@ -27,29 +28,29 @@ if (!command) {
     }
     throw new Error(`Command ${commandKey} not found`);
 }
-command(key, env, filename, force);
+command(key, env, filename, force, inputFilename);
 
-function encryptCommand(key: string|Buffer, env: string, filename: string, force: boolean) {
+function encryptCommand(key: string|Buffer, env: string, filename: string, force: boolean, inputFilename: string|null) {
     if (!key) {
         key = generateKey();
         log('info', 'Generated key: base64:' + Buffer.from(key).toString('base64'));
     }
-    const envFile = getEnvFileName(env);
+    const envFile = inputFilename ?? getEnvFileName(env);
     var data = getFile(envFile);
     var encrypted = encrypt(data, parseKey(key));
     writeFile(envFile + '.encrypted', encrypted, force);
     log('success', 'Encrypted to ' + envFile + '.encrypted');
 }
 
-function decryptCommand(key: string, env: string, filename: string, force: boolean) {
+function decryptCommand(key: string, env: string, filename: string, force: boolean, inputFilename: string|null) {
     if (!key) {
         throw new Error('Key is required');
     }
-    const envFile = getEnvFileName(env);
+    const envFile = inputFilename ?? getEnvFileName(env);
     var data = getFile(envFile + '.encrypted');
     var decrypted = decrypt(data, parseKey(key));
     writeFile(filename ?? envFile, decrypted, force);
-    log('success', 'Decrypted to ' + filename ?? envFile);
+    log('success', 'Decrypted to ' + (filename ?? envFile));
 }
 
 function log(level: string, message: string) {
