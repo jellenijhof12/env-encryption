@@ -91,14 +91,22 @@ function writeFile(path, data, force) {
     fs_1.default.writeFileSync(path, data, 'utf8');
 }
 function encrypt(data, key) {
-    const iv = crypto_1.default.randomBytes(16);
+    const iv = crypto_1.default.randomBytes(16); // Securely generates a new IV for each encryption.
     const cipheriv = crypto_1.default.createCipheriv(cipher, key, iv);
-    const encrypted = Buffer.concat([cipheriv.update(data), cipheriv.final()]);
+    const encrypted = Buffer.concat([cipheriv.update(data, 'utf8'), cipheriv.final()]);
+    // Returns IV + ':' + encrypted data, both as hexadecimal strings.
     return iv.toString('hex') + ':' + encrypted.toString('hex');
 }
 function decrypt(data, key) {
-    const [iv, encrypted] = data.split(':').map(s => Buffer.from(s, 'hex'));
+    // Splits the data into IV and encrypted data, assuming both are hexadecimal strings.
+    const parts = data.split(':');
+    if (parts.length !== 2) {
+        throw new Error('The encrypted data is not properly formatted.');
+    }
+    const iv = Buffer.from(parts[0], 'hex');
+    const encryptedData = Buffer.from(parts[1], 'hex');
     const decipher = crypto_1.default.createDecipheriv(cipher, key, iv);
-    const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
-    return decrypted.toString();
+    // Decryption process considering 'utf8' encoding for the final output.
+    const decrypted = Buffer.concat([decipher.update(encryptedData), decipher.final()]);
+    return decrypted.toString('utf8'); // Ensures the output matches the original encoding.
 }
