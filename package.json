@@ -8,7 +8,10 @@
     "start": "node index.js",
     "dev": "ts-node index.ts",
     "build": "tsc",
-    "watch": "nodemon --exec ts-node index.ts"
+    "watch": "nodemon --exec ts-node index.ts",
+    "release": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "repository": {
     "type": "git",
